@@ -1,26 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
+
+import { withCookies } from 'react-cookie';
+
+import Rotas from './Rotas';
+
+function App(props) {
+  let { cookies } = props;
+  let token = cookies.get('token');
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {token ? <Rotas.rotasAcesso/> : <Rotas.rotasLogin/>}
     </div>
   );
 }
 
-export default App;
+export default withCookies(App);
